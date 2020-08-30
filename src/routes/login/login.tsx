@@ -1,13 +1,21 @@
-import React, { useRef, MutableRefObject, FormEvent, useContext } from 'react';
+import React, { useRef, MutableRefObject, FormEvent, useContext, useEffect } from 'react';
 import './login.css';
 import useForm from '../../hooks/useForm';
 import { post } from '../../services/http';
 import { AppContext } from '../../contexts/app.context';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
+  const history = useHistory();
   const appContext = useContext(AppContext);
   const formRef: MutableRefObject<HTMLFormElement|null> = useRef(null);
   const {form, updateForm} = useForm({});
+
+  useEffect(() => {
+    if (appContext.user) {
+      history.push('/doctors');
+    }
+  }, []);
 
   const register = (event: FormEvent) => {
     event.preventDefault();
@@ -18,6 +26,7 @@ const Login = () => {
         appContext.update('user', res);
         const user = btoa(JSON.stringify(res));
         localStorage.setItem('user', user);
+        history.push('/doctors');
       });
     } else {
       alert('Please fill all the fields correctly.')

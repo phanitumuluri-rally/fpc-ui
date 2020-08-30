@@ -28,9 +28,7 @@ function App() {
             <Route path="/doctors">
               <Doctors />
             </Route>
-            <Redirect
-              to="/login"
-            />
+            <Redirect to="/login" />
           </Switch>
         </Router>
       </div>
