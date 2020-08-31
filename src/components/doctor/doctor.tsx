@@ -14,7 +14,7 @@ const Doctor: FunctionComponent<DoctorProps> = ({doctor}) => {
       </div>
       <div className="align-center column">
         <h4><a href={"/doctors/" + doctor.user.id} >{doctor.user.firstName}, {doctor.user.lastName}, {doctor.user.designation}</a></h4>
-        <div>{doctor.specialities.map(s => s.speciality).join(', ')}</div>
+        <div>{(doctor.specialities || []).map(s => s.speciality).join(', ')}</div>
         <div>{doctor.address.address1}</div>
         <div>{doctor.address.address2} {doctor.address.zipCode}</div>
         <div>{doctor.address.phone} PHONE</div>
