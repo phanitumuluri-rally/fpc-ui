@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../contexts/app.context';
 
 const Header = () => {
+  const appContext = useContext(AppContext);
+  
   return <nav className="navbar navbar-expand-md fixed-top bg-white">
     <div className="container">
         <a className="navbar-brand title" href="#">
@@ -16,14 +19,14 @@ const Header = () => {
 
             </ul>
             <form className="form-inline mt-2 mt-md-0">
-                <li className="dropdown profileCTA">
+                {appContext.user ? <li className="dropdown profileCTA">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                         aria-expanded="false">Profile <span className="caret"></span></a>
                     <ul className="dropdown-menu" aria-labelledby="about-us">
                         <li><a href="#">Settings</a></li>
                         <li><a href="/login">Logout</a></li>
                     </ul>
-                </li>
+                </li> : <></> }
             </form>
         </div>
     </div>
